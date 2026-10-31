@@ -3,191 +3,391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joe's Portfolio</title>
-
+    <title>Joe | Personal Portfolio</title>
     <style>
-        /* Simple styles for the whole page */
-        body {
-            background-color: #f2f4f7;
-            color: #222;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
+        /* --- Root CSS Variables & Reset --- */
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-heading: #ffffff;
+            --accent-cyan: #00f2fe;
+            --accent-blue: #4facfe;
+            --accent-purple: #7928ca;
+            --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            padding-top: 70px;
+        }
+
+        /* --- Header & Navigation --- */
         header {
-            background-color: #172033;
-            color: white;
-            padding: 25px;
-            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
         }
 
         nav {
-            margin-top: 15px;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
         }
 
-        nav a {
-            color: white;
-            margin: 0 10px;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
             text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
-        nav a:hover {
-            color: #65d9e8;
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* --- Main Layout --- */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
         section {
-            background-color: white;
-            margin: 25px auto;
-            max-width: 900px;
-            padding: 35px;
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        h1, h2 {
-            color: #172033;
+        section:last-of-type {
+            border-bottom: none;
         }
 
-        header h1 {
-            color: white;
-        }
-
-        .intro {
-            text-align: center;
-        }
-
-        .button {
-            background-color: #16879a;
-            color: white;
+        .section-title {
+            font-size: 2rem;
+            color: var(--text-heading);
+            margin-bottom: 1.5rem;
+            position: relative;
             display: inline-block;
-            margin-top: 10px;
-            padding: 10px 18px;
-            text-decoration: none;
         }
 
-        .button:hover {
-            background-color: #106674;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 2px;
         }
 
-        .skills, .projects {
+        /* --- Section 1: Hero / About --- */
+        #about .hero-container {
             display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--accent-cyan);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: fit-content;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            color: var(--text-heading);
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            max-width: 700px;
+            color: #8b949e;
+        }
+
+        /* --- Section 2: Skills Grid --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+        }
+
+        .skill-card h3 {
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-card p {
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
+        /* --- Section 3: Projects --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card h3 {
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
             flex-wrap: wrap;
-            gap: 15px;
         }
 
-        .skill, .project {
-            background-color: #e8f4f6;
-            border-left: 4px solid #16879a;
-            flex: 1;
-            min-width: 220px;
-            padding: 18px;
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
         }
 
-        .project h3 {
-            margin-top: 0;
+        .project-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: opacity 0.2s;
         }
 
-        .contact a {
-            color: #16879a;
+        .project-link:hover {
+            opacity: 0.8;
         }
 
+        /* --- Section 4: Contact & AI Disclosure --- */
+        .contact-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-box p {
+            margin-bottom: 1rem;
+        }
+
+        .ai-disclosure {
+            background: rgba(121, 40, 202, 0.08);
+            border: 1px solid rgba(121, 40, 202, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .ai-disclosure h4 {
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-disclosure p {
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
+        /* --- Footer --- */
         footer {
-            background-color: #172033;
-            color: white;
-            padding: 20px;
             text-align: center;
+            padding: 2rem;
+            color: #8b949e;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
         }
 
-        @media (max-width: 600px) {
-            nav a {
-                display: block;
-                margin: 8px;
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
             }
-
-            section {
-                margin: 15px;
-                padding: 25px;
+            nav {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Joe's Portfolio</h1>
-        <p>Creative Full-Stack Developer and Systems Enthusiast</p>
 
+    <!-- Header Navigation -->
+    <header>
         <nav>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
+            <div class="logo">Joe<span>.dev</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </nav>
     </header>
 
     <main>
-        <section class="intro">
-            <h2>Hi, I'm Joe!</h2>
-            <p>I build websites, useful programs, and automation tools. I enjoy learning how technology works and creating simple solutions to interesting problems.</p>
-            <a class="button" href="#projects">View My Projects</a>
-        </section>
-
+        <!-- Section 1: Hero / About -->
         <section id="about">
-            <h2>About Me</h2>
-            <p>I am interested in full-stack development, computer systems, security, and content creation. I like working with both software and hardware, and I am always learning something new.</p>
+            <div class="hero-container">
+                <span class="hero-tag">Available for Projects</span>
+                <h1 class="hero-title">Creative Developer & <span class="gradient-text">Systems Enthusiast</span></h1>
+                <p class="hero-desc">
+                    Hi, I'm Joe. I build responsive web user interfaces, write low-level automation tools, and explore AI agent implementations. Passionate about performant code and clean software design.
+                </p>
+            </div>
         </section>
 
+        <!-- Section 2: Technical Skills -->
         <section id="skills">
-            <h2>My Skills</h2>
-            <div class="skills">
-                <div class="skill">
-                    <h3>Programming</h3>
-                    <p>Python, C++, JavaScript, HTML, and CSS.</p>
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Frontend Development</h3>
+                    <p>Semantic HTML5, CSS3 Grid/Flexbox, JavaScript (ES6+), and Responsive Web Design.</p>
                 </div>
-                <div class="skill">
-                    <h3>Web Development</h3>
-                    <p>Node.js, React, Tailwind CSS, and REST APIs.</p>
+                <div class="skill-card">
+                    <h3>Systems & Languages</h3>
+                    <p>C++, Python scripting, Linux environment configuration, and Bash automation.</p>
                 </div>
-                <div class="skill">
-                    <h3>Systems</h3>
-                    <p>Linux, Bash, PowerShell, Docker, and local AI tools.</p>
-                </div>
-                <div class="skill">
-                    <h3>Creative Tools</h3>
-                    <p>Git, GitHub, VS Code, video editing, and content creation.</p>
+                <div class="skill-card">
+                    <h3>Tooling & Workflow</h3>
+                    <p>Git, GitHub, VS Code, Local AI Integration, and Terminal-first workflows.</p>
                 </div>
             </div>
         </section>
 
+        <!-- Section 3: Featured Projects -->
         <section id="projects">
-            <h2>My Projects</h2>
-            <div class="projects">
-                <div class="project">
-                    <h3>System Utilities</h3>
-                    <p>Scripts for Windows performance, debloating, and Linux automation.</p>
-                    <a href="https://github.com/" target="_blank">View on GitHub</a>
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div>
+                        <h3>Personal Web Portfolio</h3>
+                        <p>A lightweight, responsive developer showcase built using custom HTML5 and modern CSS styling.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">Responsive</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com" target="_blank" class="project-link">View Source Code &rarr;</a>
                 </div>
-                <div class="project">
-                    <h3>Local AI Tools</h3>
-                    <p>Python tools for local AI, data analysis, and useful automation.</p>
-                    <a href="https://github.com/" target="_blank">View on GitHub</a>
-                </div>
-                <div class="project">
-                    <h3>Web Applications</h3>
-                    <p>Small websites, API projects, and tools for developers.</p>
-                    <a href="https://github.com/" target="_blank">View on GitHub</a>
+
+                <div class="project-card">
+                    <div>
+                        <h3>System Automation Suite</h3>
+                        <p>Custom scripts designed for local OS performance tuning and workflow automation.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Bash</span>
+                            <span class="tag">Automation</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com" target="_blank" class="project-link">View Repository &rarr;</a>
                 </div>
             </div>
         </section>
 
-        <section class="contact" id="contact">
-            <h2>Contact Me</h2>
-            <p>Want to talk about a project or technology?</p>
-            <p>Email: <a href="mailto:joe@example.com">joe@example.com</a></p>
-            <p>GitHub: <a href="https://github.com/" target="_blank">github.com</a></p>
+        <!-- Section 4: Contact & AI Disclosure -->
+        <section id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-box">
+                <p>I am always open to discussing new projects, software engineering opportunities, or technical collaborations.</p>
+                <p>Email: <strong>contact@example.com</strong></p>
+            </div>
+
+            <!-- AI Usage Disclosure required by submission rules -->
+            <div class="ai-disclosure">
+                <h4>AI Usage Disclosure</h4>
+                <p>
+                    AI was used as a assistant to advice the some HTML structure and CSS reset rules. All project descriptions, layout decisions, color palette customizations, and final deployment setup were manually managed and configured by me.
+                </p>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Joe's Portfolio</p>
+        <p>&copy; 2026 Joe. Built with HTML & Custom CSS.</p>
     </footer>
+
 </body>
 </html>
